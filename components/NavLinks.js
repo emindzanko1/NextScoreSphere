@@ -2,6 +2,7 @@ import { MdSearch, MdOutlineSearchOff, MdLogout } from 'react-icons/md';
 import { FaRegUser, FaUser } from 'react-icons/fa';
 import Link from 'next/link';
 import classes from './NavLinks.module.css';
+import ThemeSwitch from './ThemeSwitch';
 
 const NavLinks = ({ onToggleSearch, showSearchInput }) => {
   return (
@@ -12,32 +13,11 @@ const NavLinks = ({ onToggleSearch, showSearchInput }) => {
       <Link href='/auth'>
         <FaUser />
       </Link>
+      <div className={classes['theme-switch-wrapper']}>
+        <ThemeSwitch />
+      </div>
     </nav>
   );
 };
 
 export default NavLinks;
-
-{
-  /* <Link href='/auth'>{({ isActive }) => (isActive ? <FaUser /> : <FaRegUser />)}</Link> */
-}
-
-{
-  /* {!token && <NavLink to='/auth'>{({ isActive }) => (isActive ? <FaUser /> : <FaRegUser />)}</NavLink>} */
-}
-
-{
-  /* {token && (
-        <Form action='/logout' method='post'>
-          <button>
-            <MdLogout />
-          </button>
-        </Form>
-      )} */
-}
-
-{
-  /* <div className='theme-switch-wrapper'>
-        <ThemeSwitch />
-      </div> */
-}
