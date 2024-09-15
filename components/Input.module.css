@@ -112,17 +112,42 @@
 }
 
 @media (max-width: 768px) {
-  .search-container {
-    padding: 15px;
+  .search-wrapper {
+    margin: 1rem 0;
+    width: 100%; 
   }
 
   .filter-buttons button {
-    padding: 8px 15px;
+    padding: 8px;
     font-size: 0.9rem;
   }
 
   .search-result-item span {
     font-size: 1rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .search-wrapper {
+    width: 100%; 
+  }
+
+  .filter-buttons {
+    flex-direction: column; 
+  }
+
+  .filter-buttons button {
+    width: 100%; 
+    margin-bottom: 10px;
+    font-size: 0.8rem;
+  }
+
+  .search-results {
+    max-height: 200px;
+  }
+
+  .search-result-item span {
+    font-size: 0.9rem; 
   }
 }
 
