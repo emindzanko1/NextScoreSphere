@@ -6,7 +6,6 @@ import { usePathname } from 'next/navigation';
 
 const SportLinks = () => {
   const pathname = usePathname();
-  console.log(pathname);
   const [activeLink, setActiveLink] = useState('');
 
   const handleActive = link => {
