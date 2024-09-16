@@ -27,7 +27,7 @@ main {
   display: flex;
   flex: 1;
   padding: 1rem;
-  background: var(--color-quaternary);
+  background: #f0f0f0;
 }
 
 .dark main {
