@@ -1,7 +1,7 @@
 'use-client';
 import { useEffect, useRef, useState } from 'react';
 import classes from './Input.module.css';
-import SearchOverlay from './SearchOverlay';
+import SearchOverlay from './Dropdown/SearchOverlay';
 
 const Input = () => {
   const [searchText, setSearchText] = useState('');
