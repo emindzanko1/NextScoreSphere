@@ -1,4 +1,4 @@
-import { areDatesEqual, getLastAndNext7Days } from '../app/util/helpers';
+import { areDatesEqual, getLastAndNext7Days } from '../../util/helpers';
 import classes from './CalendarDropdown.module.css';
 
 const dates = getLastAndNext7Days(new Date());
