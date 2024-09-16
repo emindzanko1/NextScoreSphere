@@ -1,0 +1,35 @@
+.calendar__dropdown-menu {
+  position: absolute;
+  background: var(--color-primary);
+  border: 1px solid #ccc;
+  list-style-type: none;
+  padding: 0;
+  border-radius: 5px;
+  margin-top: 5px;
+  max-height: 900px;
+  overflow-y: auto;
+  z-index: 1;
+  width: 100%;
+  left: 0;
+  top: 100%;
+  box-sizing: border-box;
+}
+
+.calendar__dropdown-menu li {
+  display: inline-block;
+  padding: 5px 10px;
+  margin: 5px;
+  cursor: pointer;
+  background-color: transparent;
+  border-radius: 5px;
+}
+
+.calendar__dropdown-menu li:hover {
+  background-color: #f0f0f0;
+  color: black;
+}
+
+.calendar__dropdown-menu .today-item {
+  background-color: var(--color-secondary);
+  color: black;
+}

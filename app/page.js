@@ -1,6 +1,7 @@
 import SportLinks from '@/components/SportLinks';
 import PinnedSection from '@/components/PinnedSidebar/PinnedSection';
-import Drale from '@/components/Drale';
+import FilterButton from '@/components/FilterButtons';
+import classes from './page.module.css';
 
 export default function Home() {
   return (
@@ -8,6 +9,11 @@ export default function Home() {
       <SportLinks />
       <main>
         <PinnedSection />
+        <div className={classes.wrapper}>
+          <div className={classes['main-content']}>
+            <FilterButton />
+          </div>
+        </div>
       </main>
     </>
   );
