@@ -1,0 +1,66 @@
+.styled-table {
+  width: 100%;
+  border-collapse: collapse;
+  background: rgba(255, 255, 255, 0.1);
+  overflow: hidden;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.styled-table thead {
+  background: rgba(255, 255, 255, 0.2);
+  color: #fff;
+}
+
+.styled-table th,
+.styled-table td {
+  padding: 15px;
+  color: blue;
+}
+
+.styled-table th {
+  font-weight: bold;
+}
+
+.styled-table tbody tr {
+  transition: background 0.3s, transform 0.3s;
+  border-top: 1px solid rgba(0, 0, 0, 0.2);
+}
+
+.styled-table tbody tr:hover {
+  cursor: pointer;
+  background: var(--color-tertiary);
+}
+
+.star-btn {
+  background: none;
+  border: none;
+  color: black;
+  font-size: 24px;
+  cursor: pointer;
+  transition: color 0.3s;
+  margin-right: 30px;
+}
+
+.star-btn-active {
+  background: var(--color-primary);
+  border: none;
+  font-size: 24px;
+  cursor: pointer;
+  transition: color 0.3s;
+}
+
+.star-btn:hover {
+  color: black;
+}
+
+.badge {
+  width: 30px;
+  height: 100px;
+  height: auto;
+}
+
+.result {
+  font-size: 18px;
+  font-weight: bold;
+  color: #00aaff;
+}

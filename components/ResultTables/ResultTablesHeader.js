@@ -1,16 +1,17 @@
 'use client';
 import { CiStar } from 'react-icons/ci';
 import { FaStar, FaChevronDown, FaChevronUp } from 'react-icons/fa';
-import classes from './ResultTables.module.css';
-import { useState } from 'react';
+import classes from './ResultTablesHeader.module.css';
 
-const TableHeader = ({ leagueName, leagueEmblem, areaName, allStarsActive, handleMainStarClick }) => {
-  const [isExpanded, setIsExpanded] = useState(false);
-
-  const toggleChevron = () => {
-    setIsExpanded(!isExpanded);
-  };
-
+const TableHeader = ({
+  leagueName,
+  leagueEmblem,
+  areaName,
+  allStarsActive,
+  handleMainStarClick,
+  isExpanded,
+  toggleChevron,
+}) => {
   return (
     <div className={classes['league-info']}>
       <button onClick={handleMainStarClick} className={classes['star-btn']}>
@@ -24,8 +25,7 @@ const TableHeader = ({ leagueName, leagueEmblem, areaName, allStarsActive, handl
       <div className={classes['chevron-icons']} onClick={toggleChevron}>
         {isExpanded ? <FaChevronUp /> : <FaChevronDown />}
         <span className={classes['tooltip']}>
-          {isExpanded ? 'Hide ' : 'Show '}
-          all matches of this competition!
+          {isExpanded ? 'Hide all matches of this competition!' : 'Show all matches of this competition!'}
         </span>
       </div>
     </div>
