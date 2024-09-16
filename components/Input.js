@@ -1,7 +1,7 @@
 'use-client';
 import { useEffect, useRef, useState } from 'react';
 import classes from './Input.module.css';
-import Link from 'next/link';
+import SearchOverlay from './SearchOverlay';
 
 const Input = () => {
   const [searchText, setSearchText] = useState('');
@@ -104,34 +104,7 @@ const Input = () => {
         </button>
       )}
       {search && (
-        <div className={classes['search-overlay']}>
-          <div className={classes['filter-buttons']}>
-            <button onClick={() => handleFilterChange('all')} className={classes[filter === 'all' ? 'active' : '']}>
-              All
-            </button>
-            <button
-              onClick={() => handleFilterChange('league')}
-              className={classes[filter === 'league' ? 'active' : '']}
-            >
-              League
-            </button>
-            <button onClick={() => handleFilterChange('team')} className={classes[filter === 'team' ? 'active' : '']}>
-              Team
-            </button>
-          </div>
-          <ul className={classes['search-results']}>
-            {filteredItems.map(item => (
-              <Link
-                href={item.type === 'league' ? `/league/${item.id}` : `/team/${item.id}`}
-                key={item.id}
-                className={classes['search-result-item']}
-              >
-                <img src={item.flag} alt={`${item.name} flag`} className={classes['search-result-flag']} />
-                <span>{item.name}</span>
-              </Link>
-            ))}
-          </ul>
-        </div>
+        <SearchOverlay filter={filter} filteredItems={filteredItems} handleFilterChange={handleFilterChange} />
       )}
     </div>
   );

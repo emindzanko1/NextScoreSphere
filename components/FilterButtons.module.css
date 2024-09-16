@@ -1,0 +1,50 @@
+.filter-buttons {
+  display: flex;
+  justify-content: space-between;
+  padding: 0 1rem;
+  margin: 20px 0;
+}
+
+.filter-buttons button {
+  flex: 1;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  font-size: 1rem;
+  cursor: pointer;
+  background-color: #e0e0e0;
+  color: #333;
+  transition: background-color 0.3s ease, color 0.3s ease;
+  margin-right: 10px;
+}
+
+.filter-buttons button:last-child {
+  margin-right: 0;
+}
+
+.filter-buttons .active {
+  background: var(--color-secondary);
+}
+
+.filter-buttons button:hover {
+  background: var(--color-secondary);
+}
+
+@media (max-width: 768px) {
+  .filter-buttons button {
+    padding: 8px;
+    font-size: 0.9rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .filter-buttons {
+    flex-direction: column;
+  }
+
+  .filter-buttons button {
+    width: 100%;
+    margin-bottom: 10px;
+    font-size: 0.8rem;
+  }
+}
