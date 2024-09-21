@@ -1,0 +1,168 @@
+.league-content {
+  margin-top: 20px;
+}
+
+.league-table table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.league-table th,
+.league-table td {
+  padding: 12px;
+  border: 1px solid #ddd;
+  text-align: left;
+}
+
+.league-table th {
+  background-color: #f4f4f4;
+  color: #333;
+  font-weight: 600;
+}
+
+.league-table td {
+  background-color: #fff;
+}
+
+.league-schedule,
+.league-results {
+  background-color: #fff;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  margin-top: 20px;
+  padding: 20px;
+}
+
+.league-schedule h3,
+.league-results h3 {
+  font-size: 1.8em;
+  margin-bottom: 15px;
+  color: #333;
+  border-bottom: 2px solid #007bff;
+  padding-bottom: 10px;
+}
+
+.league-schedule ul,
+.league-results ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.league-schedule li,
+.league-results li {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15px;
+  border-bottom: 1px solid #ddd;
+  color: #555;
+  transition: background-color 0.3s ease;
+}
+
+.league-schedule li:nth-child(even),
+.league-results li:nth-child(even) {
+  background-color: #f9f9f9;
+}
+
+.league-schedule li:hover,
+.league-results li:hover {
+  background-color: #f1f1f1;
+}
+
+.league-schedule li:last-child,
+.league-results li:last-child {
+  border-bottom: none;
+}
+
+.matchday-header {
+  font-size: 1.5em;
+  color: #007bff;
+  margin-top: 20px;
+}
+
+.matchday-header h4 {
+  margin: 0;
+}
+
+.match-info {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.match-info span {
+  font-size: 1em;
+  color: #555;
+}
+
+.match-info .team-name {
+  font-weight: 600;
+}
+
+.match-info .score {
+  font-weight: bold;
+}
+
+.match-info .date {
+  color: #888;
+}
+
+@media (max-width: 768px) {
+  .league-schedule li,
+  .league-results li {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .match-info {
+    width: 100%;
+  }
+
+  .match-info span {
+    width: 100%;
+    text-align: left;
+  }
+
+  .match-info .team-name {
+    font-size: 1.2em;
+  }
+
+  .match-info .score {
+    font-size: 1.2em;
+  }
+}
+
+.team-info {
+  display: flex;
+  align-items: center;
+}
+
+.team-crest {
+  width: 35px;
+  height: 35px;
+  margin-right: 12px;
+  border-radius: 50%;
+}
+
+@media (max-width: 768px) {
+  .league-header {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .league-nav {
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .league-nav button {
+    width: 100%;
+    padding: 14px;
+  }
+
+  .league-table th,
+  .league-table td {
+    font-size: 14px;
+  }
+}
