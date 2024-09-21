@@ -22,3 +22,15 @@
   background: var(--color-secondary);
   color: black;
 }
+
+@media (max-width: 768px) {
+  .league-nav {
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .league-nav button {
+    width: 100%;
+    padding: 14px;
+  }
+}

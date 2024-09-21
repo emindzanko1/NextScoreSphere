@@ -1,6 +1,7 @@
 import { promises as fs } from 'fs';
 import classes from './page.module.css';
 import LeagueDetailClient from '@/components/LeagueTable/LeagueDetail';
+import LeagueHeader from '@/components/LeagueTable/LeagueHeader';
 
 const LeagueDetail = async ({ params }) => {
   const leagueId = params.leagueId;
@@ -12,20 +13,14 @@ const LeagueDetail = async ({ params }) => {
   const leaguesReq = JSON.parse(leaguesFile);
   const leagues = leaguesReq.leagues;
   const league = leagues.find(league => league.id == leagueId);
-  
+
   if (!league) {
     return <p>Loading...</p>;
   }
 
   return (
     <div className={classes['league-details']}>
-      <header className={classes['league-header']}>
-        <img src={league.emblem} alt={`${league.name} logo`} />
-        <div>
-          <h2>{league.name}</h2>
-          <p>Season: 2024/2025</p>
-        </div>
-      </header>
+      <LeagueHeader league={league} />
       <LeagueDetailClient standings={standing} league={league} />
     </div>
   );
