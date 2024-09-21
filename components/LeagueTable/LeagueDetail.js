@@ -1,10 +1,10 @@
 'use client'; 
 import { useState } from 'react';
 import LeagueTable from '@/components/LeagueTable/LeagueTable';
-// import MatchesList from '@/components/MatchesList';
+import MatchesList from '@/components/MatchesList';
 import classes from './LeagueDetail.module.css';
 
-const LeagueDetailClient = ({ standings, league }) => {
+const LeagueDetailClient = ({ standings, results, schedule }) => {
   const [selectedTab, setSelectedTab] = useState('table');
 
   const renderContent = () => {
@@ -15,14 +15,14 @@ const LeagueDetailClient = ({ standings, league }) => {
         return (
           <div className={classes['league-schedule']}>
             <h3>Schedule</h3>
-            {/* <MatchesList matches={[]} type='schedule' /> */}
+            <MatchesList matches={schedule} type='schedule' />
           </div>
         );
       case 'results':
         return (
           <div className={classes['league-results']}>
             <h3>Results</h3>
-            {/* <MatchesList matches={[]} type='results' /> */}
+            <MatchesList matches={results} type='results' />
           </div>
         );
       default:

@@ -13,6 +13,35 @@ const LeagueDetail = async ({ params }) => {
   const leaguesReq = JSON.parse(leaguesFile);
   const leagues = leaguesReq.leagues;
   const league = leagues.find(league => league.id == leagueId);
+  const matchesFile = await fs.readFile(process.cwd() + '/lib/data/matches.json', 'utf8');
+  const matchesReq = JSON.parse(matchesFile);
+  const allMatches = matchesReq.matches;
+  const matchesForLeague = allMatches.filter(match => match.competition.id == leagueId);
+  const today = new Date();
+
+  const pastMatches = [];
+
+  for (const matchObject of matchesForLeague) {
+    const matchesForPast = matchObject.matches.filter(match => {
+      const matchDate = new Date(match.utcDate);
+      return matchDate < today;
+    });
+
+    pastMatches.push(...matchesForPast);
+  }
+
+  pastMatches.sort((a, b) => b.matchday - a.matchday);
+
+  const futureMatches = [];
+
+  for (const matchObject of matchesForLeague) {
+    const matchesForFuture = matchObject.matches.filter(match => {
+      const matchDate = new Date(match.utcDate);
+      return matchDate >= today;
+    });
+
+    futureMatches.push(...matchesForFuture);
+  }
 
   if (!league) {
     return <p>Loading...</p>;
@@ -21,7 +50,7 @@ const LeagueDetail = async ({ params }) => {
   return (
     <div className={classes['league-details']}>
       <LeagueHeader league={league} />
-      <LeagueDetailClient standings={standing} league={league} />
+      <LeagueDetailClient standings={standing} results={pastMatches} schedule={futureMatches}/>
     </div>
   );
 };

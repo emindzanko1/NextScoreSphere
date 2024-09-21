@@ -66,3 +66,37 @@ export const areDatesEqual = (isoDate, label) => {
 
   return formattedDate === labelDate || (label === 'Today' && formattedDate === formatedToday);
 };
+
+export const timestampToTime = timestamp => {
+  const date = new Date(timestamp * 1000);
+
+  const hours = date.getHours();
+
+  const minutes = '0' + date.getMinutes();
+
+  const seconds = '0' + date.getSeconds();
+
+  const formattedTime = hours + ':' + minutes.slice(-2);
+
+  return formattedTime;
+};
+
+export const timestampToDate = timestamp => {
+  const date = new Date(timestamp * 1000);
+
+  const year = date.getFullYear();
+  const month = ('0' + (date.getMonth() + 1)).slice(-2);
+  const day = ('0' + date.getDate()).slice(-2);
+
+  const formattedDate = `${year}-${month}-${day}`;
+
+  return formattedDate;
+};
+
+export const todayFormattedDate = () => {
+  const today = new Date();
+  const todayFormattedDate = `${today.getFullYear()}-${('0' + (today.getMonth() + 1)).slice(-2)}-${(
+    '0' + today.getDate()
+  ).slice(-2)}`;
+  return todayFormattedDate;
+};
