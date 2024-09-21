@@ -3,6 +3,8 @@ import PinnedSection from '@/components/PinnedSidebar/PinnedSection';
 import FilterButton from '@/components/TablesFilterButtons/FilterButtons';
 import classes from './page.module.css';
 import ResultTables from '@/components/ResultTables/ResultTables';
+import FeaturedMatch from '@/components/FeaturedMatch';
+import ScrollToTopButton from '@/components/ScrollToTop';
 
 export default function Home() {
   return (
@@ -15,6 +17,10 @@ export default function Home() {
             <FilterButton />
             <ResultTables />
           </div>
+        </div>
+        <FeaturedMatch />
+        <div className={classes.scroll}>
+          <ScrollToTopButton />
         </div>
       </main>
     </>
