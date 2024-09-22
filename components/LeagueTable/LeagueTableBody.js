@@ -1,3 +1,4 @@
+import Image from 'next/image';
 import classes from './LeagueTableBody.module.css';
 
 const TableBody = ({ standings }) => {
@@ -7,7 +8,13 @@ const TableBody = ({ standings }) => {
         <tr key={team.id}>
           <td>{team.position}</td>
           <td className={classes['team-info']}>
-            <img src={team.team.crest} alt={`${team.team.name} crest`} className={classes['team-crest']} />
+            <Image
+              src={team.team.crest}
+              alt={`${team.team.name} crest`}
+              className={classes['team-crest']}
+              width={20}
+              height={20}
+            />
             {team.team.name}
           </td>
           <td>{team.playedGames}</td>

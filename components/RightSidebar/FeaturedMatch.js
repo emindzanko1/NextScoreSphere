@@ -1,3 +1,4 @@
+import Image from 'next/image';
 import classes from './FeaturedMatch.module.css';
 
 const FeaturedMatch = ({ match }) => {
@@ -93,7 +94,7 @@ const FeaturedMatch = ({ match }) => {
       <a href={`/football/match/${homeTeam.name}-${awayTeam.name}`} className={classes['match-link']}>
         <div className={classes['match-info']}>
           <div className={classes['team home-team']}>
-            <img src={homeTeam.crest} alt={homeTeam.name} className={classes['team-logo']} />
+            <Image src={homeTeam.crest} alt={homeTeam.name} className={classes['team-logo']} width={20} height={20} />
             <div className={classes['team-name']}>{homeTeam.name}</div>
           </div>
           <div className={classes['match-details']}>
@@ -101,7 +102,7 @@ const FeaturedMatch = ({ match }) => {
             <span className={classes['match-status']}>Today</span>
           </div>
           <div className={classes['team away-team']}>
-            <img src={awayTeam.crest} alt={awayTeam.name} className={classes['team-logo']} />
+            <Image src={awayTeam.crest} alt={awayTeam.name} className={classes['team-logo']} width={20} height={20} />
             <div className={classes['team-name']}>{awayTeam.name}</div>
           </div>
         </div>
