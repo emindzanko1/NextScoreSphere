@@ -1,12 +1,12 @@
 import SportLinks from '@/components/SportLinks/SportLinks';
 import PinnedSection from '@/components/PinnedSidebar/PinnedSection';
-import FilterButton from '@/components/TablesFilterButtons/FilterButtons';
 import classes from './page.module.css';
-import ResultTables from '@/components/ResultTables/ResultTables';
 import FeaturedMatch from '@/components/RightSidebar/FeaturedMatch';
 import ScrollToTopButton from '@/components/RightSidebar/ScrollToTop';
+import MainTables from '@/components/TablesFilterButtons/MainTables';
 
 export default function Home() {
+
   return (
     <>
       <SportLinks />
@@ -14,8 +14,7 @@ export default function Home() {
         <PinnedSection />
         <div className={classes.wrapper}>
           <div className={classes['main-content']}>
-            <FilterButton />
-            <ResultTables />
+            <MainTables />
           </div>
         </div>
         <FeaturedMatch />

@@ -3,14 +3,29 @@ import { useState } from 'react';
 import classes from './FilterButtons.module.css';
 import CalendarDatePicker from './CalendarDatePicker';
 
-const FilterButton = () => {
+const FilterButton = ({ setFetchedData }) => {
   const [activeButton, setActiveButton] = useState(0);
   const [currentDate, setCurrentDate] = useState(new Date());
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+  const [jsonData, setJsonData] = useState(null);
   const buttons = ['All', 'Live', 'Done', 'Schedule'];
+
+  const fetchJsonData = async index => {
+    try {
+      const response = await fetch(`/api?index=${index}`);
+      if (!response.ok) {
+        throw new Error('Network response was not ok');
+      }
+      const data = await response.json();
+      setFetchedData(data);
+    } catch (error) {
+      console.error('Fetch error:', error);
+    }
+  };
 
   const handleButtonClick = index => {
     setActiveButton(index);
+    fetchJsonData(index);
   };
 
   return (

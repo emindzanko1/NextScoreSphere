@@ -1,15 +1,16 @@
 'use client';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import classes from './ResultTables.module.css';
 import TableHeader from './ResultTablesHeader';
 import TableBody from './ResultTablesBody';
+import { timestampToDate, todayFormattedDate } from '@/util/helpers';
 
-const ResultTables = ({ matches }) => {
+const ResultTables = ({ data }) => {
   const [allStarsActive, setAllStarsActive] = useState(false);
   const [favourites, setFavourites] = useState([]);
   const [selectedMatch, setSelectedMatch] = useState(null);
-  const [isModalOpen, setIsModalOpen] = useState(false);
-  const [isExpanded, setIsExpanded] = useState(true);
+  const [matches, setMatches] = useState([]);
+  const [expandedLeagues, setExpandedLeagues] = useState({});
 
   const handleMainStarClick = () => {
     setAllStarsActive(!allStarsActive);
@@ -31,112 +32,149 @@ const ResultTables = ({ matches }) => {
 
   const handleRowClick = matchData => {
     setSelectedMatch(matchData);
-    setIsModalOpen(true);
   };
 
-  const closeModal = () => {
-    setIsModalOpen(false);
+  const today = new Date();
+  const formattedDate = today.toISOString().split('T')[0];
+  // const response = await fetch(`https://www.test.com/api/v1/sport/football/scheduled-events/${formattedDate}`, {
+  //   cache: 'no-store',
+  // });
+  // if (!response.ok) {
+  //   throw new Error('Network response was not ok');
+  // }
+
+  // const data = await response.json();
+  // const formattedToday = todayFormattedDate();
+  // const todayMatches = data.events.filter(match => {
+  //   const matchDate = timestampToDate(match.startTimestamp);
+  //   return matchDate === formattedToday;
+  // });
+
+  // const initialExpandedState = todayMatches.reduce((acc, match) => {
+  //   const leagueName = match.tournament.name;
+  //   acc[leagueName] = true;
+  //   return acc;
+  // }, {});
+
+  // setExpandedLeagues(initialExpandedState);
+
+  // setMatches(todayMatches);
+
+  const toggleChevron = leagueName => {
+    setExpandedLeagues(prevState => ({
+      ...prevState,
+      [leagueName]: !prevState[leagueName],
+    }));
   };
 
-  const toggleChevron = () => {
-    setIsExpanded(!isExpanded);
+  // const leagues = Object.values(
+  //   matches.reduce((acc, match) => {
+  //     const allowedCountries = new Set([
+  //       'England',
+  //       'Spain',
+  //       'Italy',
+  //       'Germany',
+  //       'France',
+  //       'Netherlands',
+  //       'Portugal',
+  //       'Brazil',
+  //     ]);
+
+  //     const countryName = match.tournament.category.name;
+
+  //     if (allowedCountries.has(countryName) && !acc[countryName]) {
+  //       const leagueName = match.tournament.name;
+
+  //       acc[countryName] = {
+  //         leagueName,
+  //         leagueEmblem: match.tournament.emblem,
+  //         areaName: countryName,
+  //         leagueMatches: [match],
+  //       };
+  //     } else if (acc[countryName] && acc[countryName].leagueName === match.tournament.name) {
+  //       acc[countryName].leagueMatches.push(match);
+  //     }
+
+  //     return acc;
+  //   }, {})
+  // );
+
+  const groupMatchesByLeague = matches => {
+    return matches.reduce((acc, match) => {
+      const leagueKey = match.competition.name;
+      if (!acc[leagueKey]) {
+        acc[leagueKey] = {
+          leagueName: leagueKey,
+          leagueEmblem: match.competition.emblem,
+          areaName: match.area.name,
+          leagueMatches: [],
+        };
+      }
+      acc[leagueKey].leagueMatches.push(match);
+      return acc;
+    }, {});
   };
 
-  const placeholderData = {
-    leagueName: 'Premier League',
-    leagueEmblem: 'https://crests.football-data.org/PL.png',
-    areaName: 'England',
-    leagueMatches: [
-      {
-        area: {
-          id: 2072,
-          name: 'England',
-          code: 'ENG',
-          flag: 'https://crests.football-data.org/770.svg',
-        },
-        competition: {
-          id: 2021,
-          name: 'Premier League',
-          code: 'PL',
-          type: 'LEAGUE',
-          emblem: 'https://crests.football-data.org/PL.png',
-        },
-        season: {
-          id: 2287,
-          startDate: '2024-08-16',
-          endDate: '2025-05-25',
-          currentMatchday: 4,
-          winner: null,
-        },
-        id: 497410,
-        utcDate: '2024-08-16T19:00:00Z',
-        status: 'FINISHED',
-        matchday: 1,
-        stage: 'REGULAR_SEASON',
-        group: null,
-        lastUpdated: '2024-09-12T00:20:51Z',
-        homeTeam: {
-          id: 66,
-          name: 'Manchester City FC',
-          shortName: 'Man City',
-          tla: 'MCFC',
-          crest: 'https://crests.football-data.org/65.png',
-        },
-        awayTeam: {
-          id: 63,
-          name: 'Brighton & Hove Albion FC',
-          shortName: 'Brighton Hove',
-          tla: 'BHA',
-          crest: 'https://crests.football-data.org/397.png',
-        },
-        score: {
-          winner: 'HOME_TEAM',
-          duration: 'REGULAR',
-          fullTime: {
-            home: 1,
-            away: 0,
-          },
-          halfTime: {
-            home: 0,
-            away: 0,
-          },
-        },
-        odds: {
-          msg: 'Activate Odds-Package in User-Panel to retrieve odds.',
-        },
-        referees: [
-          {
-            id: 11446,
-            name: 'Robert Jones',
-            type: 'REFEREE',
-            nationality: 'England',
-          },
-        ],
-      },
-    ],
-  };
+  let leagues;
+
+  if (!data) {
+    return <h2>There are no matches today!</h2>;
+  }
+
+  leagues = groupMatchesByLeague(data);
 
   return (
     <div className={classes['table-container']}>
-      <div key='placeholder' className={classes['league-section']}>
-        <TableHeader
-          leagueName='Premier League'
-          leagueEmblem='https://crests.football-data.org/PL.png'
-          areaName='England'
-          allStarsActive={allStarsActive}
-          handleMainStarClick={handleMainStarClick}
-          isExpanded={isExpanded}
-          toggleChevron={toggleChevron}
-        />
-        {isExpanded && (
-          <TableBody
-            matches={placeholderData.leagueMatches}
-            favourites={favourites}
-            handleFavorite={handleFavorite}
-            handleRowClick={handleRowClick}
-          />
-        )}
-      </div>
+      {Object.keys(leagues).map(leagueName => {
+        const league = leagues[leagueName];
+        return (
+          <div key={leagueName} className={classes['league-section']}>
+            <TableHeader
+              leagueName={league.leagueName}
+              leagueEmblem={league.leagueEmblem}
+              areaName={league.areaName}
+              allStarsActive={allStarsActive}
+              handleMainStarClick={handleMainStarClick}
+              isExpanded={!!expandedLeagues[league.leagueName]}
+              toggleChevron={() => toggleChevron(league.leagueName)}
+            />
+            {/* {expandedLeagues[league.leagueName] && ( */}
+              <TableBody
+                // image={placeholderData.test}
+                matches={league.leagueMatches}
+                favourites={favourites}
+                handleFavorite={handleFavorite}
+                handleRowClick={handleRowClick}
+              />
+            {/* )} */}
+          </div>
+        );
+      })}
+      {/* {Object.keys(leagues).map(leagueName => {
+        const league = leagues[leagueName];
+        return (
+          <div key={leagueName} className={classes['league-section']}>
+            <TableHeader
+              leagueName={league.leagueName}
+              leagueEmblem={league.leagueEmblem}
+              areaName={league.areaName}
+              allStarsActive={allStarsActive}
+              handleMainStarClick={handleMainStarClick}
+              isExpanded={!!expandedLeagues[league.leagueName]}
+              toggleChevron={() => toggleChevron(league.leagueName)}
+            />
+            {expandedLeagues[league.leagueName] && (
+              <TableBody
+                image={placeholderData.test}
+                matches={league.leagueMatches}
+                favourites={favourites}
+                handleFavorite={handleFavorite}
+                handleRowClick={handleRowClick}
+              />
+            )}
+          </div>
+        );
+      })} */}
     </div>
   );
 };
