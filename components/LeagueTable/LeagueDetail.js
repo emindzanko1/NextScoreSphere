@@ -1,8 +1,8 @@
 'use client'; 
 import { useState } from 'react';
 import LeagueTable from '@/components/LeagueTable/LeagueTable';
-import MatchesList from '@/components/MatchesList';
 import classes from './LeagueDetail.module.css';
+import MatchesList from './MatchesList';
 
 const LeagueDetailClient = ({ standings, results, schedule }) => {
   const [selectedTab, setSelectedTab] = useState('table');

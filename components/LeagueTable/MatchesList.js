@@ -1,5 +1,5 @@
-import { formatMatchDate } from '../util/helpers';
-import classes from './LeagueTable/LeagueTableBody.module.css';
+import { formatMatchDate } from '../../util/helpers';
+import classes from './LeagueTableBody.module.css';
 
 const MatchesList = ({ matches, type }) => {
   let lastMatchday = null;

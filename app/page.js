@@ -1,10 +1,10 @@
-import SportLinks from '@/components/SportLinks';
+import SportLinks from '@/components/SportLinks/SportLinks';
 import PinnedSection from '@/components/PinnedSidebar/PinnedSection';
 import FilterButton from '@/components/TablesFilterButtons/FilterButtons';
 import classes from './page.module.css';
 import ResultTables from '@/components/ResultTables/ResultTables';
-import FeaturedMatch from '@/components/FeaturedMatch';
-import ScrollToTopButton from '@/components/ScrollToTop';
+import FeaturedMatch from '@/components/RightSidebar/FeaturedMatch';
+import ScrollToTopButton from '@/components/RightSidebar/ScrollToTop';
 
 export default function Home() {
   return (
