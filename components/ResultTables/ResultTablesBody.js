@@ -4,7 +4,6 @@ import classes from './ResultTablesBody.module.css';
 import { formatScore, formatTime, timestampToTime } from '../../util/helpers';
 
 const TableBody = ({ image, favourites, handleFavorite, handleRowClick, matches }) => {
-  console.log(matches);
   const rows = matches.map((match, index) => {
     const { homeTeam, awayTeam, homeScore, awayScore } = match;
     const date = timestampToTime(match.startTimestamp);
