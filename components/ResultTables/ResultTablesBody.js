@@ -9,7 +9,7 @@ const TableBody = ({ image, favourites, handleFavorite, handleRowClick, matches 
     const { homeTeam, awayTeam, homeScore, awayScore } = match;
     const date = timestampToTime(match.startTimestamp);
     return (
-      <tr key={index} onClick={() => handleRowClick(match)}>
+      <tr key={match.id} onClick={() => handleRowClick(match)}>
         <td>
           <button
             onClick={e => {

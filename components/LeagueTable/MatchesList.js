@@ -3,7 +3,7 @@ import classes from './LeagueTableBody.module.css';
 
 const MatchesList = ({ matches, type }) => {
   let lastMatchday = null;
-
+  
   return (
     <ul>
       {matches.map((match, index) => {
@@ -11,7 +11,7 @@ const MatchesList = ({ matches, type }) => {
         lastMatchday = match.matchday;
 
         return (
-          <div key={index}>
+          <div key={match.id}>
             {isNewMatchday && (
               <li className={classes['matchday-header']}>
                 <h4>Matchday {match.matchday}</h4>

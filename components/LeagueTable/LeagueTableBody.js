@@ -5,7 +5,7 @@ const TableBody = ({ standings }) => {
   return (
     <tbody>
       {standings.map(team => (
-        <tr key={team.id}>
+        <tr key={team.position}>
           <td>{team.position}</td>
           <td className={classes['team-info']}>
             <Image
