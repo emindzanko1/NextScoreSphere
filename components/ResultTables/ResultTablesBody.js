@@ -7,7 +7,8 @@ import Image from 'next/image';
 const TableBody = ({ image, favourites, handleFavorite, handleRowClick, matches }) => {
   const rows = matches.map((match, index) => {
     const { homeTeam, awayTeam, homeScore, awayScore } = match;
-    const date = timestampToTime(match.startTimestamp);
+    // const date = timestampToTime(match.startTimestamp);
+    const time = formatTime(match.utcDate)
     return (
       <tr key={match.id} onClick={() => handleRowClick(match)}>
         <td>
@@ -21,7 +22,8 @@ const TableBody = ({ image, favourites, handleFavorite, handleRowClick, matches 
             {favourites.includes(index) ? <FaStar /> : <CiStar />}
           </button>
         </td>
-        <td>{date}</td>
+        {/* <td>{date}</td> */}
+        <td>{time}</td>
         <td>
           {/* <img src={image} alt={`${homeTeam.name} Badge`} className={classes.badge} /> */}
           <Image src={homeTeam.crest} alt={`${homeTeam.name} Badge`} className={classes.badge} width={20} height={20} />

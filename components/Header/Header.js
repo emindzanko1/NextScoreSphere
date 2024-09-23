@@ -6,7 +6,7 @@ import Link from 'next/link';
 import NavLinks from './NavLinks/NavLinks';
 import Input from './SearchInput/Input';
 
-const Header = () => {
+const Header = ({ data }) => {
   const [showSearchInput, setShowSearchInput] = useState(false);
 
   const handleToggleSearch = () => {
@@ -18,7 +18,7 @@ const Header = () => {
       <div className={classes.title}>
         <Link href='/'>ScoreSphere</Link>
       </div>
-      {showSearchInput && <Input />}
+      {showSearchInput && <Input data={data} />}
       <NavLinks onToggleSearch={handleToggleSearch} showSearchInput={showSearchInput} />
     </header>
   );

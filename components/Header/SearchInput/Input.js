@@ -3,50 +3,25 @@ import { useEffect, useRef, useState } from 'react';
 import classes from './Input.module.css';
 import SearchOverlay from './Dropdown/SearchOverlay';
 
-const Input = () => {
+const Input = ({ data }) => {
   const [searchText, setSearchText] = useState('');
   const [search, setSearch] = useState(false);
   const [filter, setFilter] = useState('all');
-  const [pinnedLeagues, setPinnedLeagues] = useState([
-    {
-      id: 2021,
-      name: 'Premier League',
-      flag: 'https://upload.wikimedia.org/wikipedia/en/thumb/f/f2/Premier_League_Logo.svg/1920px-Premier_League_Logo.svg.png',
-    },
-    {
-      id: 2014,
-      name: 'La Liga',
-      flag: 'https://upload.wikimedia.org/wikipedia/commons/thumb/5/54/LaLiga_EA_Sports_2023_Vertical_Logo.svg/360px-LaLiga_EA_Sports_2023_Vertical_Logo.svg.png',
-    },
-  ]);
-  const [pinnedClubs, setPinnedClubs] = useState([
-    {
-      id: 65,
-      name: 'Manchester City',
-      flag: 'https://upload.wikimedia.org/wikipedia/en/thumb/e/eb/Manchester_City_FC_badge.svg/800px-Manchester_City_FC_badge.svg.png',
-    },
-    { id: 81, name: 'Barcelona', flag: 'https://upload.wikimedia.org/wikipedia/en/4/47/FC_Barcelona_%28crest%29.svg' },
-  ]);
-
+  const [filteredItems, setFilteredItems] = useState(data);
+  
   const searchWrapperRef = useRef(null);
   const searchInputRef = useRef(null);
-
-  const mergedPinnedItems = [
-    ...pinnedLeagues.map(item => ({ ...item, type: 'league' })),
-    ...pinnedClubs.map(item => ({ ...item, type: 'club' })),
-  ];
-  const [filteredItems, setFilteredItems] = useState(mergedPinnedItems);
 
   const handleSearch = event => {
     const text = event.target.value.toLowerCase();
     setSearchText(text);
 
-    const filteredBySearch = mergedPinnedItems.filter(item => item.name.toLowerCase().includes(text));
+    const filteredBySearch = data.filter(item => item.name.toLowerCase().includes(text));
 
     const results = filteredBySearch.filter(item => {
       if (filter === 'all') return true;
-      if (filter === 'league') return item.type === 'league';
-      if (filter === 'team') return item.type === 'club';
+      if (filter === 'league') return item.area !== undefined; 
+      if (filter === 'team') return item.area === undefined; 
       return true;
     });
 
@@ -55,7 +30,7 @@ const Input = () => {
 
   const handleClear = () => {
     setSearchText('');
-    setFilteredItems(mergedPinnedItems);
+    setFilteredItems(data);
     searchInputRef.current.focus();
   };
 
@@ -73,14 +48,12 @@ const Input = () => {
   const handleFilterChange = newFilter => {
     setFilter(newFilter);
 
-    const filteredBySearch = mergedPinnedItems.filter(item =>
-      item.name.toLowerCase().includes(searchText.toLowerCase())
-    );
+    const filteredBySearch = data.filter(item => item.name.toLowerCase().includes(searchText.toLowerCase()));
 
     const results = filteredBySearch.filter(item => {
       if (newFilter === 'all') return true;
-      if (newFilter === 'league') return item.type === 'league';
-      if (newFilter === 'team') return item.type === 'club';
+      if (newFilter === 'league') return item.area !== undefined; 
+      if (newFilter === 'team') return item.area === undefined;
       return true;
     });
 
